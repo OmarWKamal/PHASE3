@@ -1,0 +1,39 @@
+USE phase3;
+DROP table employee;
+DROP table department;
+DROP table project;
+DROP table works;
+
+CREATE TABLE employee (
+    eid      INT             NOT NULL,  
+    ename  	 VARCHAR(20) ,
+    salary  VARCHAR(14)  ,
+    department_id   INT   ,
+    PRIMARY KEY (eid)    ,
+    FOREIGN KEY (department_id)
+		REFERENCES department(did)
+);
+       
+CREATE TABLE department (
+    did      INT             NOT NULL,  
+    dname  	 VARCHAR(20) ,
+    manager_id  INT  ,
+    PRIMARY KEY (did)    ,
+    FOREIGN KEY (manager_id)
+		REFERENCES employee(eid)
+);
+	
+CREATE TABLE project (
+    pid      INT             NOT NULL,  
+    pname  	 VARCHAR(20) ,
+    PRIMARY KEY (pid)                   
+);
+CREATE TABLE works (
+    project_id      INT             NOT NULL,  
+    employee_id  	 VARCHAR(20) ,
+    PRIMARY KEY (employee_id, project_id) ,
+    FOREIGN KEY (project_id)
+		REFERENCES project(pid), 
+	FOREIGN KEY (employee_id)
+		REFERENCES employee(eid)
+);
